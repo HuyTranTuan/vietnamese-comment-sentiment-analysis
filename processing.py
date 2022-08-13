@@ -331,7 +331,7 @@ y_test = label_encoder.transform(y_test)
 
 print(label_encoder.classes_)
 
-tf_vectorizer = TfidfVectorizer(ngram_range=(1,2),max_df=0.8,max_features=15000, encoding='utf-8')
+tf_vectorizer = TfidfVectorizer(ngram_range=(1,2),max_df=0.8, max_features=15000, encoding='utf-8')
 X_train_tf_vectorizer = tf_vectorizer.fit_transform(X_train)
 X_test_tf_vectorizer = tf_vectorizer.transform(X_test)
 
@@ -340,9 +340,9 @@ MODEL_PATH='C:\\Users\\Admin\\OneDrive\\Desktop\\AD2_LACuong'
 
 # LogisticRegression
 start_time = time.time()
-text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1,2), max_df=0.8, max_features=None)),
+text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1,2), max_df=0.8)),
                      ('tfidf', TfidfTransformer()),
-                     ('clf', LogisticRegression(solver='lbfgs', multi_class='auto', max_iter=10000))
+                     ('clf', LogisticRegression())
                     ])
 LG_model = text_clf.fit(X_train, y_train)
 lr_time = time.time() - start_time
@@ -354,9 +354,9 @@ pickle.dump(LG_model, open(os.path.join(MODEL_PATH, "linear_classifier.pkl"), 'w
 
 # SVM prediction 
 start_time = time.time()
-text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1,2), max_df=0.8, max_features=None)), 
+text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1,2), max_df=0.8)), 
                      ('tfidf', TfidfTransformer()),
-                     ('clf', SVC(gamma='scale'))
+                     ('clf', SVC())
                     ])
 SVM_model = text_clf.fit(X_train, y_train)
 y_predict = SVM_model.predict(X_test)
@@ -377,14 +377,14 @@ pickle.dump(naive_model, open(os.path.join(MODEL_PATH, "naive_bayes.pkl"), 'wb')
 
 
 start_time = time.time()
-num_classes= 7
+num_classes= 6
 vocab_size = 5000
 embedding_dim = 128
 max_len = 20
 
 tokenizer = Tokenizer(num_words=vocab_size)
 tokenizer.fit_on_texts(X_train)
-word_index = tokenizer.word_index
+# word_index = tokenizer.word_index
 sequences = tokenizer.texts_to_sequences(X_train)
 padded_sequences = pad_sequences(sequences, truncating='post', maxlen=max_len)
 
