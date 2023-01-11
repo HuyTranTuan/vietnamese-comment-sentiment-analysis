@@ -336,7 +336,7 @@ X_train_tf_vectorizer = tf_vectorizer.fit_transform(X_train)
 X_test_tf_vectorizer = tf_vectorizer.transform(X_test)
 
 
-MODEL_PATH='C:\\Users\\Admin\\OneDrive\\Desktop\\AD2_LACuong'
+MODEL_PATH='./'
 
 # LogisticRegression
 start_time = time.time()

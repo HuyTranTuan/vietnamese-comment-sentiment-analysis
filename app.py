@@ -349,13 +349,7 @@ tf_vectorizer = TfidfVectorizer(ngram_range=(1,4),max_df=0.8,max_features=15000,
 X_train_tf_vectorizer = tf_vectorizer.fit_transform(X_train)
 X_test_tf_vectorizer = tf_vectorizer.transform(X_test)
 
-MODEL_PATH='C:\\Users\\Admin\\OneDrive\\Desktop\\AD2_LACuong'
-
-
-# nb_model3 = pickle.load(open(os.path.join(MODEL_PATH,"svm.pkl"), 'rb'))
-# y_pred = nb_model.predict(X_test)
-# print(classification_report(y_test, y_pred, target_names=list(label_encoder.classes_)))
-
+MODEL_PATH='./'
 
 
 class GetData(Resource):
